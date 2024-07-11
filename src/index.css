@@ -1,0 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap");
+
+@font-face {
+  font-family: "Leiko";
+  src: url(./assets/fonts/Leiko-Regular.otf);
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

@@ -1,0 +1,37 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #221518;
+  color: #fff;
+}
+
+.heading-main-hero {
+  -webkit-text-stroke: 1.5px #f7e1bc;
+  color: transparent;
+  text-shadow: 5px 5px 12px #000000;
+}
+
+.btn-action-hero {
+  position: relative;
+}
+
+.btn-action-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50px; 
+  border: 3px solid transparent;
+  background: linear-gradient(160deg,#F7E1BC,#54372B,#F7E1BC) border-box;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) padding-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
