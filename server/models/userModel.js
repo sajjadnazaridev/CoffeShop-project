@@ -1,33 +1,51 @@
 const {dbConnection} = require('../config/dbConnection')
+const {result} = require("lodash/object");
 
 
 function getAllUsers(callback) {
-    dbConnection.query('SELECT * FROM `users`' , (err, result) => {
-        if (err){
-            console.error(err)
-            callback(err,null)
-            return
-        }
-        else callback(result,null)
-    })
+    dbConnection.query(
+        'SELECT * FROM `users`' ,
+        callback
+    )
 }
 
 
 function getUserById (id , callback){
-    dbConnection.query('SELECT * FROM `users` WHERE id = ? ' ,[id] , (err, result) => {
-        if (err){
-            console.error(err)
-            callback(err, null)
-            return
+    dbConnection.query(
+        'SELECT * FROM `users` WHERE id = ? ',
+        [id],
+        callback
+    )
+}
+
+
+function deleteUser (id , callback){
+    dbConnection.query(
+        'DELETE FROM users WHERE `users`.`id` = ?',
+        [id],
+        callback
+    )
+}
+
+
+function addUser(userData, callback){
+    dbConnection.query(
+        'INSERT INTO `users` (`id`, `userName`, `fullName`, `email`, `phoneNumber`, `gender`, `permission`, `createdAt`) ' +
+        'VALUES (NULL, ?, ?, ?, ?, ?, ?, current_timestamp())',
+        [userData.userName, userData.fullName, userData.email, userData.phoneNumber, userData.gender, userData.permission],
+        (error, results) => {
+            if (error) {
+                return callback(error);
+            }
+            callback(null, { id: results.insertId, ...userData });
         }
-
-        callback(result, null)
-    })
-
+    );
 }
 
 
 module.exports = {
     getAllUsers,
-    getUserById
+    getUserById,
+    addUser,
+    deleteUser
 }
